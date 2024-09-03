@@ -1,0 +1,23 @@
+#include<bits/stdc++.h>
+using namespace std;
+struct Data {
+   int x, y;
+};
+double interpolate(Data function[], int xi, int n) {
+   double result = 0;
+   for (int i = 0; i < n; i++) {
+      double term = function[i].y;
+      for (int j = 0; j < n; j++) {
+         if (j != i) {
+            term = term * (xi - function[j].x) / double(function[i].x - function[j].x);
+         }
+      }
+      result += term;
+   }
+   return result;
+}
+int main() {
+   Data function[] = {{0,3}, {1,2}, {6,9}, {10,17}};
+   cout << interpolate(function, 3, 5) << endl;
+   return 0;
+}
